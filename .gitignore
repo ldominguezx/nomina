@@ -1,0 +1,7 @@
+*.log
+*.tmp
+*.cache
+.env
+
+vendor/
+node_modules/
