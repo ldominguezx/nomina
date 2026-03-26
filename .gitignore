@@ -1,0 +1,9 @@
+# Ignorar archivos no necesarios
+*.log
+*.tmp
+*.cache
+
+# Variables de entorno
+.env
+vendor/
+node_modules/
