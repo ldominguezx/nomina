@@ -22,7 +22,7 @@ body {
 
 .sidebar {
     height: 100vh;
-    background: #5741ff;
+    background: #1e3c72;
     color: white;
     padding: 20px;
 }
@@ -64,13 +64,13 @@ body {
             <?php if($_SESSION['rol'] == 'admin'): ?>
                 <a href="usuarios/list_usuarios.php">Usuarios</a>
             <?php endif; ?>
-			 <a href="">Empleados</a>
+			<a href="employees/list_employees.php">Empleados</a>
+			<a href="employees_cuenta/list_employees.php">Empleados Cuentas</a>
             <a href="#">Planilla</a>
             <a href="#">Pagos</a>
             <a href="logout.php">Cerrar sesion</a>
         </div>
 
-        <!-- Contenido -->
         <div class="col-md-10 p-4">
 
             <h2>Bienvenido, <?= $_SESSION['nombre'] ?></h2>

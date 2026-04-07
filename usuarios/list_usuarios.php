@@ -62,6 +62,7 @@ body {
 
         <a href="../dashboard.php">Inicio</a>
         <a href="../usuarios/list_usuarios.php">Usuarios</a>
+         <a href="../employees/list_employees.php">Empleados</a>
         <a href="#">Planilla</a>
         <a href="#">Pagos</a>
         <a href="../logout.php"> Cerrar sesión</a>

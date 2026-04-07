@@ -37,7 +37,7 @@
         }
 
         .btn-custom {
-            background: #00c6ff;
+            background: #d0d000;
             border: none;
         }
 
