@@ -6,6 +6,7 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 include("../conexion/conexion.php");
+define("BASE_URL", "/nomina/");
 ?>
 
 <!DOCTYPE html>
@@ -29,18 +30,7 @@ body { background: #f4f6f9; }
 <div class="container-fluid">
 <div class="row">
 
-<div class="col-md-2 sidebar">
-    <h4>Nomina</h4>
-    <hr>
-    <p><strong><?= $_SESSION['nombre'] ?></strong></p>
-
-   <a href="../dashboard.php">Inicio</a>
-        <a href="../usuarios/list_usuarios.php">Usuarios</a>
-        <a href="../employees/list_employees.php">Empleados</a>
-        <a href="#">Planilla</a>
-        <a href="#">Pagos</a>
-        <a href="../logout.php"> Cerrar sesión</a>
-</div>
+<?php include("../layouts/sidebar.php"); ?>
 
 <div class="col-md-10 p-4">
 
@@ -55,7 +45,7 @@ body { background: #f4f6f9; }
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Cédula</th>
+                    <th>Cedula</th>
                     <th>Puesto</th>
                     <th>Salario</th>
                     <th>Acciones</th>
@@ -72,7 +62,7 @@ body { background: #f4f6f9; }
                 <td><?= $row['nombre'] ?></td>
                 <td><?= $row['cedula'] ?></td>
                 <td><?= $row['puesto'] ?></td>
-                <td>$<?= $row['salario_base'] ?></td>
+                <td><?= $row['salario_base'] ?></td>
 
                 <td>
                     <a href="edit_employees.php?id=<?= $row['id_empleado'] ?>" class="btn btn-warning btn-sm">Editar</a>

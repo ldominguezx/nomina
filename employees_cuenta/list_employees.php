@@ -6,6 +6,7 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 include("../conexion/conexion.php");
+define("BASE_URL", "/nomina/");
 ?>
 
 <!DOCTYPE html>
@@ -29,23 +30,7 @@ body { background: #f4f6f9; }
 <div class="container-fluid">
 <div class="row">
 
-        <div class="col-md-2 sidebar">
-            <h4>Nomina</h4>
-            <hr>
-
-            <p><strong><?= $_SESSION['nombre'] ?></strong></p>
-
-            <a href="#">Inicio</a>
-
-            <?php if($_SESSION['rol'] == 'admin'): ?>
-            <a href="usuarios/list_usuarios.php">Usuarios</a>
-            <?php endif; ?>
-			<a href="../employees/list_employees.php">Empleados</a>
-			<a href="../employees_cuenta/list_employees.php">Empleados Cuentas</a>
-            <a href="#">Planilla</a>
-            <a href="#">Pagos</a>
-            <a href="logout.php">Cerrar sesion</a>
-        </div>
+<?php include("../layouts/sidebar.php"); ?>
 
 <div class="col-md-10 p-4">
 
