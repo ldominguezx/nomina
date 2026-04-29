@@ -7,6 +7,7 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 include("../conexion/conexion.php");
+define("BASE_URL", "/nomina/");
 
 $id = $_GET['id'];
 $result = $con->query("SELECT * FROM usuarios WHERE id_usuario = $id");
@@ -58,18 +59,7 @@ body {
 <div class="container-fluid">
 <div class="row">
 
-    <div class="col-md-2 sidebar">
-        <h4>Nomina</h4>
-        <hr>
-
-        <p><strong><?= $_SESSION['nombre'] ?></strong></p>
-
-        <a href="../dashboard.php">Inicio</a>
-        <a href="../usuarios/list_usuarios.php">Usuarios</a>
-        <a href="#">Planilla</a>
-        <a href="#">Pagos</a>
-        <a href="../logout.php">Cerrar sesión</a>
-    </div>
+    <?php include("../layouts/sidebar.php"); ?>
 
 
     <div class="col-md-10 p-4">
