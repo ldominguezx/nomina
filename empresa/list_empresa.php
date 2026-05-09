@@ -46,51 +46,77 @@ body { background: #f4f6f9; }
 
     <div class="card p-3 shadow">
 
-        <table class="table table-hover">
-            <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Cédula Jurídica</th>
-                    <th>Teléfono</th>
-                    <th>Correo</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
+<table class="table table-hover">
 
-            <tbody>
-            <?php
-            $res = $con->query("SELECT * FROM empresa");
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Cedula Jurídica</th>
+            <th>IBC</th>
+            <th>Telefono</th>
+            <th>Correo</th>
+            <th class="text-center">Acciones</th>
+        </tr>
+    </thead>
 
-            while($row = $res->fetch_assoc()){
-            ?>
-                <tr>
-                    <td><?= $row['id_empresa'] ?></td>
-                    <td><?= $row['nombre'] ?></td>
-                    <td><?= $row['cedula_juridica'] ?></td>
-                    <td><?= $row['telefono'] ?></td>
-                    <td><?= $row['correo'] ?></td>
+    <tbody>
 
-                    <td class="text-center">
+    <?php
+    $res = $con->query("SELECT * FROM empresa");
 
-                        <a href="edit_empresa.php?id=<?= $row['id_empresa'] ?>" 
-                           class="btn btn-warning btn-sm me-1" title="Editar">
-                            <i class="fas fa-edit"></i>
-                        </a>
+    while($row = $res->fetch_assoc()){
+    ?>
 
-                        <a href="delete/delete_empresa.php?id=<?= $row['id_empresa'] ?>" 
-                           class="btn btn-danger btn-sm"
-                           onclick="return confirm('¿Eliminar empresa?')"
-                           title="Eliminar">
-                            <i class="fas fa-trash"></i>
-                        </a>
+        <tr>
 
-                    </td>
-                </tr>
-            <?php } ?>
-            </tbody>
+            <td><?= $row['id_empresa'] ?></td>
 
-        </table>
+            <td>
+                <strong><?= $row['nombre'] ?></strong>
+            </td>
+
+            <td><?= $row['cedula_juridica'] ?></td>
+
+            <td>
+                <span class="badge bg-primary">
+                    <?= $row['ibc'] ?>
+                </span>
+            </td>
+
+            <td><?= $row['telefono'] ?></td>
+
+            <td><?= $row['correo'] ?></td>
+
+            <td class="text-center">
+
+                <!-- EDITAR -->
+                <a href="edit_empresa.php?id=<?= $row['id_empresa'] ?>"
+                   class="btn btn-warning btn-sm me-1"
+                   title="Editar">
+
+                    <i class="fas fa-edit"></i>
+
+                </a>
+
+                <a href="delete/delete_empresa.php?id=<?= $row['id_empresa'] ?>"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('¿Eliminar empresa?')"
+                   title="Eliminar">
+
+                    <i class="fas fa-trash"></i>
+
+                </a>
+
+            </td>
+
+        </tr>
+
+    <?php } ?>
+
+    </tbody>
+
+</table>
 
     </div>
 

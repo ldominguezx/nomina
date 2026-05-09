@@ -98,7 +98,10 @@ body {
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <a href="index.php" class="btn btn-secondary"> Volver</a>
+                    <a href="<?= BASE_URL ?>usuarios/list_usuarios.php" 
+                       class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Volver
+                    </a>
                     <button class="btn btn-primary">Actualizar Usuario</button>
                 </div>
 

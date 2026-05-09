@@ -19,7 +19,7 @@ if (session_status() === PHP_SESSION_NONE) {
 		<a href="<?= BASE_URL ?>employees/list_employees.php"> Empleados</a>
 		<a href="<?= BASE_URL ?>employees_cuenta/list_employees_cuenta.php">Empleados Cuentas</a>
 		<a href="<?= BASE_URL ?>empresa/list_empresa.php">Empresa</a>
-		<a href="<?= BASE_URL ?>empresa/list_empresa.php">Empresa Cuentas</a>
+		<a href="<?= BASE_URL ?>empresa_cuenta/list_empresa_cuenta.php">Empresa Cuentas</a>
   		<a href="#">Planilla</a>
         <a href="#">Pagos</a>
 		<a href="<?= BASE_URL ?>logout.php">Cerrar sesión</a>

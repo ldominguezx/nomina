@@ -108,7 +108,12 @@ body {
                     <input type="date" name="fecha_ingreso" class="form-control">
                 </div>
                 <div class="d-flex justify-content-between mt-3">
-                    <a href="index.php" class="btn btn-secondary">← Volver</a>
+                   
+                     <a href="<?= BASE_URL ?>employees/list_employees.php" 
+                       class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Volver
+                    </a>
+                   
                     <button class="btn btn-primary">Guardar Empleado</button>
                 </div>
 
