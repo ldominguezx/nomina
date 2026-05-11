@@ -60,15 +60,14 @@ CREATE TABLE planilla_detalle (
     salario_neto DECIMAL(10,2),
     observaciones VARCHAR(255)
 );
+
 CREATE TABLE pago_planilla (
     id_pago INT AUTO_INCREMENT PRIMARY KEY,
-    id_planilla_detalle INT NOT NULL,      
-    id_empleado_cuenta INT NOT NULL,      
-    id_empresa_cuenta INT NOT NULL,  
-    monto_pagado DECIMAL(10,2) NOT NULL, 
+    id_planilla INT NOT NULL,
+    id_empresa_cuenta INT NOT NULL,
     fecha_pago DATETIME DEFAULT CURRENT_TIMESTAMP,
-    metodo_pago VARCHAR(50),             
-    referencia VARCHAR(100),           
+    metodo_pago VARCHAR(50),
+    referencia VARCHAR(100),
     observaciones VARCHAR(255)
 );
 DROP  TABLE usuarios ;
@@ -99,12 +98,13 @@ WHERE usuario = 'admin';
 SELECT * FROM empleados;
 SELECT * FROM  empleados_cuentas;
 SELECT * FROM  empresa;
+SELECT * FROM  planilla_detalle;
 ALTER TABLE empleados_cuentas ADD FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado);
 ALTER TABLE empresa_cuentas ADD FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa);
 ALTER TABLE planilla ADD FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa);
 ALTER TABLE planilla_detalle ADD FOREIGN KEY (id_planilla) REFERENCES planilla(id_planilla);
 ALTER TABLE planilla_detalle ADD FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado);
-ALTER TABLE pago_planilla ADD FOREIGN KEY (id_planilla_detalle) REFERENCES planilla_detalle(id_detalle);
-ALTER TABLE pago_planilla ADD FOREIGN KEY (id_empleado_cuenta) REFERENCES empleados_cuentas(id_cuenta);
+ALTER TABLE pago_planilla ADD FOREIGN KEY (id_planilla) REFERENCES planilla(id_planilla);
 ALTER TABLE pago_planilla ADD FOREIGN KEY (id_empresa_cuenta) REFERENCES empresa_cuentas(id_cuenta);
 ALTER TABLE empresa ADD ibc VARCHAR(50) AFTER cedula_juridica;
+ALTER TABLE empleados_cuentas ADD principal TINYINT DEFAULT 0;

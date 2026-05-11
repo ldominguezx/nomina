@@ -15,21 +15,16 @@ if (!isset($_GET['id'])) {
 
 $id = $_GET['id'];
 
-
-$sql = "DELETE FROM empleados_cuentas
-        WHERE id_cuenta = ?";
+$sql = "DELETE FROM planilla_detalle
+        WHERE id_detalle = ?";
 
 $stmt = $con->prepare($sql);
-
-if (!$stmt) {
-    die("Error SQL: " . $con->error);
-}
 
 $stmt->bind_param("i", $id);
 
 if ($stmt->execute()) {
 
-    header("Location: ../list_employees_cuenta.php");
+    header("Location: ../list_planilla_empleados.php");
     exit();
 
 } else {
