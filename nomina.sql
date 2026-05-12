@@ -99,6 +99,7 @@ SELECT * FROM empleados;
 SELECT * FROM  empleados_cuentas;
 SELECT * FROM  empresa;
 SELECT * FROM  planilla_detalle;
+SELECT * FROM   pago_planilla;
 ALTER TABLE empleados_cuentas ADD FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado);
 ALTER TABLE empresa_cuentas ADD FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa);
 ALTER TABLE planilla ADD FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa);

@@ -75,7 +75,7 @@ body { background: #f4f6f9; }
                     <label>Moneda</label>
                     <select name="moneda" class="form-control" required>
                         <option value="01">Colones</option>
-                        <option value="02">Dólares</option>
+                        <option value="02">Dolares</option>
                     </select>
                 </div>
 
@@ -108,7 +108,7 @@ body { background: #f4f6f9; }
      
             <div class="d-flex justify-content-between">
                 <a href="<?= BASE_URL ?>employees_cuenta/list_employees.php" class="btn btn-secondary">
-                    ← Volver
+                    Volver
                 </a>
                 <button class="btn btn-primary">Guardar Cuenta</button>
             </div>

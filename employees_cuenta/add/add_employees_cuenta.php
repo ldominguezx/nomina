@@ -51,7 +51,7 @@ $stmt->bind_param("isss",
     $moneda
 );
 if ($stmt->execute()) {
-    header("Location: ../list_employees.php");
+    header("Location: ../list_employees_cuenta.php");
     exit();
 } else {
     echo "Error al guardar: " . $con->error;

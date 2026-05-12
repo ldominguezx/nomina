@@ -10,6 +10,7 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
+
 include("../conexion/conexion.php");
 
 date_default_timezone_set('America/Costa_Rica');
@@ -20,23 +21,34 @@ if (!isset($_GET['id'])) {
 
 $id_pago = $_GET['id'];
 
+
+
 function zero_fill($valor, $long = 0)
 {
     return str_pad($valor, $long, '0', STR_PAD_LEFT);
 }
 
+function text_fill($texto, $long = 0)
+{
+    return str_pad(substr($texto, 0, $long), $long, " ", STR_PAD_RIGHT);
+}
+
 function parseCuenta($cuenta)
 {
     return [
-        'producto' => substr($cuenta,0,3),
-        'moneda'   => substr($cuenta,3,2),
-        'oficina'  => substr($cuenta,5,3),
-        'numero'   => substr($cuenta,8,6),
-        'dv'       => substr($cuenta,14,1)
+
+        'producto' => substr($cuenta, 0, 3),
+
+        'moneda'   => substr($cuenta, 3, 2),
+
+        'oficina'  => substr($cuenta, 5, 3),
+
+        'numero'   => substr($cuenta, 8, 6),
+
+        'dv'       => substr($cuenta, 14, 1)
+
     ];
 }
-
-
 
 $sql_pago = "SELECT 
                 pp.*,
@@ -73,6 +85,7 @@ if (!$pago) {
     die("Pago no encontrado");
 }
 
+
 $sql_detalle = "SELECT 
                     pd.salario_neto,
                     e.nombre,
@@ -86,7 +99,8 @@ $sql_detalle = "SELECT
                 INNER JOIN empleados_cuentas ec
                     ON e.id_empleado = ec.id_empleado
 
-                WHERE pd.id_planilla = ?";
+                WHERE pd.id_planilla = ?
+                AND ec.estado = 1";
 
 $stmt_detalle = $con->prepare($sql_detalle);
 
@@ -105,17 +119,21 @@ if ($detalles->num_rows == 0) {
 }
 
 
-
-
 $cliente     = $pago['ibc'];
+
 $fecha       = date("dmY");
+
 $cuenta      = $pago['cuenta_empresa'];
+
 $comprobante = "1000";
+
 $concepto    = "PLANILLA";
 
 $total = 0;
 
 $rows = [];
+
+
 
 while($row = $detalles->fetch_assoc()){
 
@@ -124,20 +142,19 @@ while($row = $detalles->fetch_assoc()){
     $total += $row['salario_neto'];
 }
 
-
-
 $encabezado =
-    "1" .
-    zero_fill($cliente,6) .
-    $fecha .
-    zero_fill(0,6) .
-    zero_fill(0,6) .
-    "1" .
-    zero_fill(0,4) .
-    zero_fill($total * 100,12) .
-    zero_fill(0,7) .
-    zero_fill(0,7) .
-    zero_fill(0,10);
+    "1" .                               
+    zero_fill($cliente,6) .            
+    $fecha .                            
+    zero_fill(0,6) .                   
+    zero_fill(0,6) .                   
+    "1" .                               
+    zero_fill(0,4) .                  
+    zero_fill($total * 100,12) .       
+    zero_fill(0,7) .                   
+    zero_fill(0,7) .                  
+    zero_fill(0,10);                  
+
 
 $c = parseCuenta($cuenta);
 
@@ -150,9 +167,9 @@ $t1 =
     $c['dv'] .
     zero_fill($comprobante,8) .
     zero_fill($total * 100,12) .
-    str_pad($concepto,30," ",STR_PAD_RIGHT) .
-    "00";
+    text_fill($concepto,30) .
 
+    "00";
 
 
 $contenido = "";
@@ -161,8 +178,8 @@ $contenido .= $encabezado . "\r\n";
 
 $contenido .= $t1 . "\r\n";
 
-$tcs = 0;
 
+$tcs = 0;
 
 foreach($rows as $r){
 
@@ -170,7 +187,9 @@ foreach($rows as $r){
 
     $cuentaEmpleado = parseCuenta($r['numero_cuenta']);
 
-    $descripcion = strtoupper($r['nombre']);
+    $descripcion = mb_strtoupper($r['nombre'], 'UTF-8');
+
+    $descripcion = text_fill($descripcion,30);
 
     $t2 =
         "3" .
@@ -181,33 +200,35 @@ foreach($rows as $r){
         $cuentaEmpleado['dv'] .
         zero_fill($comprobante,8) .
         zero_fill($monto * 100,12) .
-        str_pad($descripcion,30," ",STR_PAD_RIGHT) .
+        $descripcion .
         "00";
 
     $contenido .= $t2 . "\r\n";
 
-    $tcs += $cuentaEmpleado['numero'];
+
+    $tcs += intval($cuentaEmpleado['numero']);
 }
 
 
-$cs = substr($cuenta,8,6) + $tcs;
+$correlativo_empresa = intval(substr($cuenta,8,6));
 
-$testkey = "IJKACARTAT";
-
+$cs = $correlativo_empresa + $tcs;
+$total_general = ($total * 2) * 100;
+$testkey = zero_fill(0,10);
 $control =
     "4" .
-    zero_fill($total * 100,15) .
+    zero_fill($total_general,15) .
     zero_fill($cs,10) .
-    str_pad($testkey,10," ",STR_PAD_RIGHT) .
+    $testkey .
     zero_fill(0,12) .
     zero_fill(0,12) .
     zero_fill(0,8);
 
 $contenido .= $control;
-
-$filename = "planilla_" . date('Ymd_His') . ".env";
+$filename = "planilla_" . date('Ymd_His') . ".ENV";
 
 header('Content-Type: text/plain');
+
 header('Content-Disposition: attachment; filename="' . $filename . '"');
 
 echo $contenido;

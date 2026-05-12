@@ -16,7 +16,7 @@ $stmt->bind_param("sssssss",
 );
 
 if ($stmt->execute()) {
-header("Location: ../../dashboard.php");
+header("Location: ../list_employees.php");
     exit();
 } else {
     echo "Error al guardar: " . $con->error;
