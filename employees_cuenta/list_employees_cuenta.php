@@ -37,11 +37,13 @@ body { background: #f4f6f9; }
 
     <div class="d-flex justify-content-between mb-3">
         <h3>Empleados</h3>
-        <a href="../employees_cuenta/create_employees_cuenta.php" class="btn btn-success">+ Nueva Cuenta</a>
+        <a href="../employees_cuenta/create_employees_cuenta.php" class="btn btn-success"> Nueva Cuenta</a>
     </div>
 
     <div class="card p-3 shadow">
-	<table class="table table-bordered">
+	<table class="table table-hover">
+
+    <thead class="table-dark">
 		<tr>
 		    <th>Empleado</th>
 		    <th>Cuenta</th>
@@ -49,7 +51,7 @@ body { background: #f4f6f9; }
 		    <th>Moneda</th>
 		    <th>Acciones</th>
 		</tr>
-
+ </thead>
 		<?php
 		$sql = "SELECT ec.*, e.nombre 
 		        FROM empleados_cuentas ec

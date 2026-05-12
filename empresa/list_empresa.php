@@ -40,7 +40,7 @@ body { background: #f4f6f9; }
     <div class="d-flex justify-content-between mb-3">
         <h3>Empresas</h3>
         <a href="<?= BASE_URL ?>empresa/create_empresa.php" class="btn btn-success">
-            <i class="fas fa-plus"></i> Nueva Empresa
+             Nueva Empresa
         </a>
     </div>
 

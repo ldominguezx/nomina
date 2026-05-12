@@ -86,7 +86,6 @@ body {
 <div class="container-fluid">
 <div class="row">
 
-    <!-- SIDEBAR -->
     <?php include("../layouts/sidebar.php"); ?>
 
    
@@ -113,16 +112,16 @@ body {
                             name="nombre" 
                             class="form-control"
                             placeholder="Ingrese el nombre"
-                            required>
+                            required autocomplete="off">
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Cédula</label>
+                        <label class="form-label">Cedula</label>
                         <input 
                             value="<?= $row['cedula'] ?>" 
                             name="cedula" 
                             class="form-control"
-                            placeholder="Ingrese la cédula">
+                            placeholder="Ingrese la cedula" autocomplete="off">
                     </div>
 
                 </div>
@@ -131,12 +130,12 @@ body {
                 <div class="row">
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Teléfono</label>
+                        <label class="form-label">Telefono</label>
                         <input 
                             value="<?= $row['telefono'] ?>" 
                             name="telefono" 
                             class="form-control"
-                            placeholder="Ingrese el teléfono">
+                            placeholder="Ingrese el telefono" autocomplete="off">
                     </div>
 
                     <div class="col-md-6 mb-3">
@@ -146,12 +145,11 @@ body {
                             value="<?= $row['correo'] ?>" 
                             name="correo" 
                             class="form-control"
-                            placeholder="Ingrese el correo">
+                            placeholder="Ingrese el correo" autocomplete="off">
                     </div>
 
                 </div>
 
-                <!-- FILA 3 -->
                 <div class="row">
 
                     <div class="col-md-6 mb-3">
@@ -160,7 +158,7 @@ body {
                             value="<?= $row['puesto'] ?>" 
                             name="puesto" 
                             class="form-control"
-                            placeholder="Ingrese el puesto">
+                            placeholder="Ingrese el puesto" autocomplete="off">
                     </div>
 
                     <div class="col-md-6 mb-3">
@@ -176,7 +174,6 @@ body {
 
                 </div>
 
-                <!-- FECHA -->
                 <div class="mb-3">
                     <label class="form-label">Fecha de Ingreso</label>
                     <input 
@@ -190,7 +187,7 @@ body {
 
                     <a href="<?= BASE_URL ?>employees/list_employees.php" 
                        class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Volver
+                     Volver
                     </a>
 
                     <button class="btn btn-primary">

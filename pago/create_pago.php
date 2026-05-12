@@ -65,6 +65,11 @@ body{
     border-left:5px solid #1e3c72;
 }
 
+.table td,
+.table th{
+    vertical-align:middle;
+}
+
 </style>
 
 </head>
@@ -88,6 +93,7 @@ body{
     <div class="card shadow p-4">
 
         <form action="add/add_pago.php" method="POST">
+
             <div class="mb-4">
 
                 <label class="form-label">
@@ -109,6 +115,7 @@ body{
                     SELECT 
                         p.*,
                         e.nombre AS empresa,
+
                         (
                             SELECT COUNT(*)
                             FROM planilla_detalle pd
@@ -125,6 +132,8 @@ body{
 
                     INNER JOIN empresa e
                     ON p.id_empresa = e.id_empresa
+
+                    ORDER BY p.id_planilla DESC
                     ";
 
                     $res = $con->query($sql);
@@ -169,6 +178,7 @@ body{
                     $empresa = $con->query("
                     SELECT ec.*, e.nombre
                     FROM empresa_cuentas ec
+
                     INNER JOIN empresa e
                     ON ec.id_empresa = e.id_empresa
                     ");
@@ -226,8 +236,54 @@ body{
                 </div>
 
             </div>
+            <div class="card shadow-sm mt-4">
 
-            <div class="row">
+                <div class="card-header bg-dark text-white">
+
+                    <i class="fas fa-users"></i>
+                    Empleados de la Planilla
+
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-bordered table-hover">
+
+                        <thead class="table-light">
+
+                            <tr>
+
+                                <th>#</th>
+                                <th>Empleado</th>
+                                <th>Horas</th>
+                                <th>Bruto</th>
+                                <th>Deducciones</th>
+                                <th>Neto</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="tabla_empleados">
+
+                            <tr>
+
+                                <td colspan="6" class="text-center">
+
+                                    Seleccione una planilla
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+            <div class="row mt-4">
 
                 <div class="col-md-6 mb-3">
 
@@ -257,6 +313,7 @@ body{
                 </div>
 
             </div>
+
             <div class="mb-3">
 
                 <label class="form-label">
@@ -271,10 +328,9 @@ body{
 
             <div class="d-flex justify-content-between mt-4">
 
-                <a href="<?= BASE_URL ?>pago_planilla/list_pago.php"
+                <a href="<?= BASE_URL ?>pago/list_pago.php"
                    class="btn btn-secondary">
 
-                    <i class="fas fa-arrow-left"></i>
                     Volver
 
                 </a>
@@ -311,13 +367,33 @@ document
     let total =
     option.getAttribute("data-total");
 
+    let id_planilla =
+    this.value;
+
     document.getElementById("empleados")
-    .innerText = empleados;
+    .innerText = empleados || 0;
 
     document.getElementById("total")
     .innerText =
     "₡" + parseFloat(total || 0)
-    .toLocaleString();
+    .toLocaleString('es-CR', {
+        minimumFractionDigits: 2
+    });
+
+    if(id_planilla != ""){
+
+        fetch("get/get_planilla_empleados.php?id_planilla=" + id_planilla)
+
+        .then(response => response.text())
+
+        .then(data => {
+
+            document.getElementById("tabla_empleados")
+            .innerHTML = data;
+
+        });
+
+    }
 
 });
 

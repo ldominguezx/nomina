@@ -82,7 +82,6 @@ body{
         <a href="create_empresa_cuenta.php"
            class="btn btn-success">
 
-            <i class="fas fa-plus"></i>
             Nueva Cuenta
 
         </a>

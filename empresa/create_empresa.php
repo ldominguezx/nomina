@@ -52,13 +52,13 @@ body { background: #f4f6f9; }
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Nombre de la Empresa</label>
                     <input name="nombre" class="form-control"
-                           placeholder="Ej: Empresa S.A" required>
+                           placeholder="" required autocomplete="off">
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Cedula Jurídica</label>
                     <input name="cedula_juridica" class="form-control"
-                           placeholder="Ej: 3-101-123456">
+                           placeholder="3-101-123456" autocomplete="off">
                 </div>
 
             </div>
@@ -69,14 +69,14 @@ body { background: #f4f6f9; }
                     <label class="form-label">Numero Cliente IBC</label>
                     <input name="numero_cliente_ibc"
                            class="form-control"
-                           placeholder="Ingrese el numero IBC">
+                           placeholder="IBC">
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">Teléfono</label>
+                    <label class="form-label">Telefono</label>
                     <input name="telefono"
                            class="form-control"
-                           placeholder="8888-8888">
+                           placeholder="8888-8888" autocomplete="off">
                 </div>
 
             </div>
@@ -88,25 +88,24 @@ body { background: #f4f6f9; }
                     <input type="email"
                            name="correo"
                            class="form-control"
-                           placeholder="correo@empresa.com">
+                           placeholder="correo@empresa.com" autocomplete="off">
                 </div>
 
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Dirección</label>
+                <label class="form-label">Direccion</label>
 
                 <textarea name="direccion"
                           class="form-control"
                           rows="3"
-                          placeholder="Ubicación de la empresa"></textarea>
+                          placeholder="Ubicacion"></textarea>
             </div>
 
             <div class="d-flex justify-content-between mt-3">
 
                 <a href="<?= BASE_URL ?>empresa/list_empresa.php"
-                   class="btn btn-secondary">
-                    <i class="fas fa-arrow-left"></i> Volver
+                   class="btn btn-secondary"> Volver
                 </a>
 
                 <button class="btn btn-primary">

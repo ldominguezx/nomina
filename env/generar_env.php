@@ -32,7 +32,20 @@ function text_fill($texto, $long = 0)
 {
     return str_pad(substr($texto, 0, $long), $long, " ", STR_PAD_RIGHT);
 }
+function quitar_tildes($texto)
+{
+    $buscar = [
+        'Á','É','Í','Ó','Ú','Ñ',
+        'á','é','í','ó','ú','ñ'
+    ];
 
+    $reemplazar = [
+        'A','E','I','O','U','N',
+        'a','e','i','o','u','n'
+    ];
+
+    return str_replace($buscar, $reemplazar, $texto);
+}
 function parseCuenta($cuenta)
 {
     return [
@@ -53,6 +66,9 @@ function parseCuenta($cuenta)
 $sql_pago = "SELECT 
                 pp.*,
                 pl.id_empresa,
+                p.periodo,
+                p.fecha_inicio,
+                p.fecha_fin,
                 emp.ibc,
                 ec.numero_cuenta AS cuenta_empresa
 
@@ -66,6 +82,7 @@ $sql_pago = "SELECT
 
             INNER JOIN empresa_cuentas ec
                 ON pp.id_empresa_cuenta = ec.id_cuenta
+            INNER  JOIN planilla p ON pp.id_planilla=p.id_planilla
 
             WHERE pp.id_pago = ?";
 
@@ -87,6 +104,8 @@ if (!$pago) {
 
 
 $sql_detalle = "SELECT 
+                    p.periodo,
+                    p.fecha_fin,
                     pd.salario_neto,
                     e.nombre,
                     ec.numero_cuenta
@@ -98,6 +117,7 @@ $sql_detalle = "SELECT
 
                 INNER JOIN empleados_cuentas ec
                     ON e.id_empleado = ec.id_empleado
+                INNER JOIN planilla p ON pd.id_planilla=p.id_planilla
 
                 WHERE pd.id_planilla = ?
                 AND ec.estado = 1";
@@ -127,7 +147,7 @@ $cuenta      = $pago['cuenta_empresa'];
 
 $comprobante = "1000";
 
-$concepto    = "PLANILLA";
+$concepto    = " PLANILLA"." ".$pago['periodo']." ". $pago['fecha_fin'];
 
 $total = 0;
 
@@ -168,7 +188,6 @@ $t1 =
     zero_fill($comprobante,8) .
     zero_fill($total * 100,12) .
     text_fill($concepto,30) .
-
     "00";
 
 
@@ -187,9 +206,14 @@ foreach($rows as $r){
 
     $cuentaEmpleado = parseCuenta($r['numero_cuenta']);
 
-    $descripcion = mb_strtoupper($r['nombre'], 'UTF-8');
+	$descripcion =
+	    mb_strtoupper($r['nombre'], 'UTF-8')
+	    . " " .
+	    $r['periodo'];
 
-    $descripcion = text_fill($descripcion,30);
+	$descripcion = quitar_tildes($descripcion);
+
+	$descripcion = text_fill($descripcion, 30);
 
     $t2 =
         "3" .
@@ -225,7 +249,7 @@ $control =
     zero_fill(0,8);
 
 $contenido .= $control;
-$filename = "planilla_" . date('Ymd_His') . ".ENV";
+$filename = "planilla_" . date('Ymd_His') . ".env";
 
 header('Content-Type: text/plain');
 

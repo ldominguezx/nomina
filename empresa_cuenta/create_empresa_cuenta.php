@@ -227,8 +227,6 @@ body{
 
                 <a href="<?= BASE_URL ?>empresa_cuenta/list_empresa_cuenta.php"
                    class="btn btn-secondary">
-
-                    <i class="fas fa-arrow-left"></i>
                     Volver
 
                 </a>

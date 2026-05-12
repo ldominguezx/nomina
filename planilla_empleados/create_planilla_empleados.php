@@ -140,7 +140,7 @@ body{
 
                     <?php
 
-                    $emp = $con->query("SELECT * FROM empleados");
+                    $emp = $con->query("SELECT * FROM empleados where activo=1");
 
                     while($e = $emp->fetch_assoc()){
 
@@ -293,7 +293,7 @@ body{
 
             <div class="d-flex justify-content-between mt-4">
 
-                <a href="<?= BASE_URL ?>planilla_detalle/list_detalle.php"
+                <a href="<?= BASE_URL ?>planilla_empleados/list_planilla_empleados.php"
                    class="btn btn-secondary">
 
                     Volver

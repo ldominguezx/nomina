@@ -74,7 +74,6 @@ body{
     <div class="d-flex justify-content-between mb-4">
 
         <h3>
-            <i class="fas fa-money-bill-wave"></i>
             Pagos Planilla
         </h3>
 
@@ -166,13 +165,7 @@ body{
                             <i class="fas fa-file-download"></i>
 
                         </a>
-                        <a href="edit_pago.php?id=<?= $row['id_pago'] ?>"
-                           class="btn btn-warning btn-sm"
-                           title="Editar">
-
-                            <i class="fas fa-edit"></i>
-
-                        </a>
+                       
                         <a href="delete/delete_pago.php?id=<?= $row['id_pago'] ?>"
                            class="btn btn-danger btn-sm"
                            onclick="return confirm('¿Eliminar pago?')"

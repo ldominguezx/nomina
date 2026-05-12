@@ -16,14 +16,26 @@ if (!isset($_GET['id'])) {
 
 $id = $_GET['id'];
 
+$sql = "SELECT 
+            pd.*,
+            p.periodo,
+            e.nombre
 
-$sql = "SELECT p.*, e.nombre
-        FROM planilla p
-        INNER JOIN empresa e
-        ON p.id_empresa = e.id_empresa
-        WHERE p.id_planilla = ?";
+        FROM planilla_detalle pd
+
+        INNER JOIN planilla p
+            ON pd.id_planilla = p.id_planilla
+
+        INNER JOIN empleados e
+            ON pd.id_empleado = e.id_empleado
+
+        WHERE pd.id_detalle = ?";
 
 $stmt = $con->prepare($sql);
+
+if (!$stmt) {
+    die("Error SQL: " . $con->error);
+}
 
 $stmt->bind_param("i", $id);
 
@@ -32,16 +44,17 @@ $stmt->execute();
 $row = $stmt->get_result()->fetch_assoc();
 
 if (!$row) {
-    die("Planilla no encontrada");
+    die("Registro no encontrado");
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 
-<title>Editar Planilla</title>
+<title>Editar Detalle Planilla</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -83,10 +96,6 @@ body{
     border-radius:10px;
 }
 
-.form-label{
-    font-weight:500;
-}
-
 </style>
 
 </head>
@@ -102,29 +111,40 @@ body{
 
     <h3 class="mb-4">
 
-        <i class="fas fa-file-invoice-dollar"></i>
-        Editar Planilla
+        Editar Detalle Planilla
 
     </h3>
 
-    <!-- CARD -->
     <div class="card shadow p-4">
 
-        <form action="edit/update_planilla.php"
+        <form action="edit/update_planilla_empleados.php"
               method="POST">
 
-
             <input type="hidden"
-                   name="id"
-                   value="<?= $row['id_planilla'] ?>">
+                   name="id_detalle"
+                   value="<?= $row['id_detalle'] ?>">
 
             <div class="mb-3">
 
                 <label class="form-label">
-                    Empresa
+                    Planilla
                 </label>
 
-                <input class="form-control"
+                <input type="text"
+                       class="form-control"
+                       value="<?= $row['periodo'] ?>"
+                       readonly>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Empleado
+                </label>
+
+                <input type="text"
+                       class="form-control"
                        value="<?= $row['nombre'] ?>"
                        readonly>
 
@@ -133,54 +153,35 @@ body{
             <div class="mb-3">
 
                 <label class="form-label">
-                    Periodo
+                    Horas Trabajadas
                 </label>
 
-                <input type="text"
-                       name="periodo"
+                <input type="number"
+                       step="0.01"
+                       name="horas_trabajadas"
                        class="form-control"
-                       value="<?= $row['periodo'] ?>"
+                       value="<?= $row['horas_trabajadas'] ?>"
                        required>
 
             </div>
 
-            <div class="row">
+            <div class="mb-3">
 
-                <div class="col-md-6 mb-3">
+                <label class="form-label">
+                    Observaciones
+                </label>
 
-                    <label class="form-label">
-                        Fecha Inicio
-                    </label>
-
-                    <input type="date"
-                           name="fecha_inicio"
-                           class="form-control"
-                           value="<?= $row['fecha_inicio'] ?>"
-                           required>
-
-                </div>
-
-                <div class="col-md-6 mb-3">
-
-                    <label class="form-label">
-                        Fecha Fin
-                    </label>
-
-                    <input type="date"
-                           name="fecha_fin"
-                           class="form-control"
-                           value="<?= $row['fecha_fin'] ?>"
-                           required>
-
-                </div>
+                <textarea name="observaciones"
+                          class="form-control"
+                          rows="3"><?= $row['observaciones'] ?></textarea>
 
             </div>
+
             <div class="d-flex justify-content-between mt-4">
 
-                <a href="<?= BASE_URL ?>planilla/list_planilla.php"
+                <a href="<?= BASE_URL ?>planilla_empleados/list_planilla_empleados.php"
                    class="btn btn-secondary">
 
-                    <i class="fas fa-arrow-left"></i>
                     Volver
 
                 </a>
@@ -188,7 +189,7 @@ body{
                 <button class="btn btn-primary">
 
                     <i class="fas fa-save"></i>
-                    Actualizar Planilla
+                    Actualizar
 
                 </button>
 

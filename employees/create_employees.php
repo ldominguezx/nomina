@@ -72,34 +72,34 @@ body {
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Nombre</label>
-                        <input name="nombre" class="form-control" placeholder="Ingrese el nombre" required>
+                        <input name="nombre" class="form-control" placeholder="Ingrese el nombre" required autocomplete="off">
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Cédula</label>
-                        <input name="cedula" class="form-control" placeholder="Ingrese la cédula">
+                        <label class="form-label">Cedula</label>
+                        <input name="cedula" class="form-control" placeholder="Ingrese la cedula" required autocomplete="off">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Teléfono</label>
-                        <input name="telefono" class="form-control" placeholder="Ingrese el telefono">
+                        <label class="form-label">Telefono</label>
+                        <input name="telefono" class="form-control" placeholder="Ingrese el telefono" required autocomplete="off">
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Correo</label>
-                        <input type="email" name="correo" class="form-control" placeholder="">
+                        <input type="email" name="correo" class="form-control" placeholder="" required autocomplete="off">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Puesto</label>
-                        <input name="puesto" class="form-control" placeholder="">
+                        <input name="puesto" class="form-control" placeholder="" required autocomplete="off">
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Salario Base</label>
-                        <input type="number" step="0.01" name="salario_base" class="form-control" placeholder="0.00">
+                        <input type="number" step="0.01" name="salario_base" class="form-control" placeholder="0.00" required autocomplete="off">
                     </div>
                 </div>
 

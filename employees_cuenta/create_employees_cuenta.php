@@ -107,7 +107,7 @@ body { background: #f4f6f9; }
 
      
             <div class="d-flex justify-content-between">
-                <a href="<?= BASE_URL ?>employees_cuenta/list_employees.php" class="btn btn-secondary">
+                <a href="<?= BASE_URL ?>employees_cuenta/list_employees_cuenta.php" class="btn btn-secondary">
                     Volver
                 </a>
                 <button class="btn btn-primary">Guardar Cuenta</button>

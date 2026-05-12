@@ -141,7 +141,7 @@ body{
 
                     <td class="text-center">
 
-                        <a href="edit_detalle.php?id=<?= $row['id_detalle'] ?>"
+                        <a href="edit_planilla_empleados.php?id=<?= $row['id_detalle'] ?>"
                            class="btn btn-warning btn-sm me-1">
 
                             <i class="fas fa-edit"></i>
