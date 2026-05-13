@@ -245,10 +245,9 @@ body{
             </div>
             <div class="d-flex justify-content-between">
 
-                <a href="<?= BASE_URL ?>empresa_cuentas/list_empresa_cuenta.php"
+               
+                <a href="<?= BASE_URL ?>empresa_cuenta/list_empresa_cuenta.php"
                    class="btn btn-secondary">
-
-                    <i class="fas fa-arrow-left"></i>
                     Volver
 
                 </a>

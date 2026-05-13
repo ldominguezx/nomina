@@ -139,7 +139,7 @@ body {
                         </label>
 
                         <input
-                            value="<?= $row['numero_cliente_ibc'] ?>"
+                            value="<?= $row['ibc'] ?>"
                             name="numero_cliente_ibc"
                             class="form-control">
                     </div>

@@ -81,7 +81,7 @@ body { background: #f4f6f9; }
 
                 <div class="col-md-2 mb-3">
                     <label>Oficina</label>
-                    <input type="number" name="oficina" class="form-control" min="1" max="245" required>
+                    <input type="number" name="oficina" class="form-control" min="0" max="245" required>
                 </div>
 
                 <div class="col-md-3 mb-3">
