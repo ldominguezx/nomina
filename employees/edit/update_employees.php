@@ -8,7 +8,8 @@ $sql = "UPDATE empleados
             puesto = ?, 
             correo = ?, 
             salario_base = ?,
-            fecha_ingreso = ?
+            fecha_ingreso = ?,
+            telefono =?
         WHERE id_empleado = ?";
 
 $stmt = $con->prepare($sql);
@@ -28,17 +29,19 @@ $correo = $_POST['correo'];
 $salario_base = floatval($_POST['salario_base']);
 
 $fecha = $_POST['fecha_ingreso'];
+$telefono = $_POST['telefono'];
 
 $id = intval($_POST['id']);
 
 $stmt->bind_param(
-    "ssssdsi",
+    "ssssdssi",
     $nombre,
     $cedula,
     $puesto,
     $correo,
     $salario_base,
     $fecha,
+    $telefono,
     $id
 );
 

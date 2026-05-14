@@ -111,7 +111,7 @@ body {
                    
                      <a href="<?= BASE_URL ?>employees/list_employees.php" 
                        class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Volver
+                       Volver
                     </a>
                    
                     <button class="btn btn-primary">Guardar Empleado</button>

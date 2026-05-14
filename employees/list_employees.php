@@ -20,6 +20,7 @@ define("BASE_URL", "/nomina/");
 <title>Empleados</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
@@ -73,7 +74,7 @@ body{
         <a href="../employees/create_employees.php"
            class="btn btn-success">
 
-            + Nuevo
+            Nuevo
 
         </a>
 
@@ -91,7 +92,7 @@ body{
                     <th>Nombre</th>
                     <th>Cédula</th>
                     <th>Puesto</th>
-                    <th>Correo</th>
+                    <th>Correo / Telefono</th>
                     <th>Salario Base</th>
                     <th>Fecha Ingreso</th>
                     <th>Estado</th>
@@ -134,7 +135,7 @@ body{
                 </td>
 
                 <td>
-                    <?= $row['correo'] ?>
+                    <?= $row['correo'] ?> / <?= $row['telefono'] ?>
                 </td>
 
                 <td>
@@ -163,24 +164,26 @@ body{
 
                 </td>
 
-                <td>
+				<td>
 
-                    <a href="edit_employees.php?id=<?= $row['id_empleado'] ?>"
-                       class="btn btn-warning btn-sm">
+				    <a href="edit_employees.php?id=<?= $row['id_empleado'] ?>"
+				       class="btn btn-warning btn-sm"
+				       title="Editar">
 
-                        Editar
+				        <i class="fas fa-edit"></i>
 
-                    </a>
+				    </a>
 
-                    <a href="delete/delete_employees.php?id=<?= $row['id_empleado'] ?>"
-                       class="btn btn-danger btn-sm"
-                       onclick="return confirm('¿Eliminar empleado?')">
+				    <a href="delete/delete_employees.php?id=<?= $row['id_empleado'] ?>"
+				       class="btn btn-danger btn-sm"
+				       title="Eliminar"
+				       onclick="return confirm('¿Eliminar empleado?')">
 
-                        Eliminar
+				        <i class="fas fa-trash"></i>
 
-                    </a>
+				    </a>
 
-                </td>
+				</td>
 
             </tr>
 
